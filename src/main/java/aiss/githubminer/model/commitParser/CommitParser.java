@@ -200,4 +200,12 @@ public class CommitParser {
         return this.getCommit().getUrl();
     }
 
+    public String getModelHtmlUrl() {
+        return this.getHtmlUrl();
+    }
+
+    public String getModelCommentsUrl() {
+        return this.getCommentsUrl();
+    }
+
 }

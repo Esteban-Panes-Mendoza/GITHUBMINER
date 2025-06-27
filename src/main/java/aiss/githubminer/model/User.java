@@ -1,6 +1,7 @@
 package aiss.githubminer.model;
 
 import aiss.githubminer.model.userParser.UserParser;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
     public String id;
@@ -8,13 +9,17 @@ public class User {
     public String name;
     public String avatar_url;
     public String web_url;
+    public String htmlUrl;
+    public Integer followers;
 
-    public User(String id, String username, String name, String avatar_url, String web_url) {
+    public User(String id, String username, String name, String avatar_url, String web_url, String htmlUrl, Integer followers) {
         this.id = id;
         this.username = username;
         this.name = name;
         this.avatar_url = avatar_url;
         this.web_url = web_url;
+        this.htmlUrl = htmlUrl;
+        this.followers = followers;
     }
 
     public String getId() {
@@ -57,13 +62,33 @@ public class User {
         this.web_url = web_url;
     }
 
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    @JsonProperty("followers")
+    public Integer getFollowers() {
+        return followers;
+    }
+
+    @JsonProperty("followers")
+    public void setFollowers(Integer followers) {
+        this.followers = followers;
+    }
+
     public static User of(UserParser userData){
         return new User(
                 userData.getId().toString(),
                 userData.getLogin(),
                 userData.getName(),
                 userData.getAvatarUrl(),
-                userData.getUrl()
+                userData.getUrl(),
+                userData.getHtmlUrl(),
+                userData.getFollowers()
         );
     }
 }

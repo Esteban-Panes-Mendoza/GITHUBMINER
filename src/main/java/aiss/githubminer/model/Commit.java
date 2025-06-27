@@ -10,8 +10,10 @@ public class Commit {
     public String author_email;
     public String authored_date;
     public String web_url;
+    public String htmlUrl;
+    public String commentsUrl;
 
-    public Commit(String id, String title, String message, String author_name, String author_email, String authored_date, String web_url) {
+    public Commit(String id, String title, String message, String author_name, String author_email, String authored_date, String web_url, String htmlUrl, String commentsUrl) {
         this.id = id;
         this.title = title;
         this.message = message;
@@ -19,6 +21,8 @@ public class Commit {
         this.author_email = author_email;
         this.authored_date = authored_date;
         this.web_url = web_url;
+        this.htmlUrl = htmlUrl;
+        this.commentsUrl = commentsUrl;
     }
 
     public String getId() {
@@ -77,6 +81,20 @@ public class Commit {
         this.web_url = web_url;
     }
 
+    public String getHtml_url() { return htmlUrl;}
+
+    public void setHtml_url(String html_url) {
+        this.htmlUrl = html_url;
+    }
+
+    public   String getCommentsUrl() {
+        return commentsUrl;
+    }
+
+    public void setCommentsUrl(String commentsUrl) {
+        this.commentsUrl = commentsUrl;
+    }
+
     public static Commit of(CommitParser commitData){
     return new Commit(
             commitData.getModelId(),
@@ -85,7 +103,9 @@ public class Commit {
             commitData.getModelAuthorName(),
             commitData.getModelAuthorEmail(),
             commitData.getModelAuthoredDate(),
-            commitData.getModelUrl()
+            commitData.getModelUrl(),
+            commitData.getModelHtmlUrl(),
+            commitData.getModelCommentsUrl()
     );
     }
 

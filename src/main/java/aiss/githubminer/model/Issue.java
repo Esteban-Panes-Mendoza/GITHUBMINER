@@ -1,6 +1,7 @@
 package aiss.githubminer.model;
 
 import aiss.githubminer.model.issueParser.IssueParser;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -17,8 +18,12 @@ public class Issue {
     public List<Comment> comments;
     public User author;
     public User assignee;
+    public String htmlUrl;
+    public String authorAssociation;
 
-    public Issue(String id, String title, String description, String state, String created_at, String updated_at, String closed_at, List<String> labels, Integer votes, List<Comment> comments, User author, User assignee) {
+    public Issue(String id, String title, String description, String state, String created_at,
+                 String updated_at, String closed_at, List<String> labels, Integer votes, List<Comment> comments,
+                 User author, User assignee, String htmlUrl, String authorAssociation) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,6 +36,8 @@ public class Issue {
         this.comments = comments;
         this.author = author;
         this.assignee = assignee;
+        this.htmlUrl =  htmlUrl;
+        this.authorAssociation = authorAssociation;
     }
 
 
@@ -130,6 +137,23 @@ public class Issue {
         this.assignee = assignee;
     }
 
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    public String getAuthorAssociation() {
+        return authorAssociation;
+    }
+
+    public void setAuthorAssociation(String authorAssociation) {
+        this.authorAssociation = authorAssociation;
+    }
+
     public static Issue of(IssueParser issueData, List<Comment> comments) {
         return new Issue(
                 issueData.getId().toString(),
@@ -143,7 +167,9 @@ public class Issue {
                 issueData.getTotalCount(),
                 comments,
                 issueData.getAuthorModel(),
-                issueData.getAssigneeModel()
+                issueData.getAssigneeModel(),
+                issueData.getHtmlUrl(),
+                issueData.getAuthorAssociation()
 
 
         );
